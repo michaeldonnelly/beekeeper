@@ -1,7 +1,5 @@
 ﻿using Beekeeper;
 
-string dictionaryFile = "/usr/share/dict/words";
-//string dictionaryFile = "/Users/donnelly/Projects/beekeeper/foo.txt";
 IWordGame game;
 
 List<char> letters = new()
@@ -19,9 +17,10 @@ game = new EssBee(letters, requiredLetter);
 List<string> validWords = new();
 List<string> specialWords = new();
 
-using (StreamReader dictionary = new(dictionaryFile))
+//using (IDictionaryFile dictionaryFile = new LinuxDictionaryFile())
+using (IDictionaryFile dictionaryFile = new Brute())
 {
-    string? word = dictionary.ReadLine();
+    string? word = dictionaryFile.NextWord();
     while (word is not null)
     {
         word = word.ToUpper();
@@ -33,7 +32,7 @@ using (StreamReader dictionary = new(dictionaryFile))
                 specialWords.Add(word);
             }
         }
-        word = dictionary.ReadLine();
+        word = dictionaryFile.NextWord();
     }
 }
 
