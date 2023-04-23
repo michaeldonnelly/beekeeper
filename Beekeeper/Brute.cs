@@ -30,16 +30,16 @@ namespace Beekeeper
             }
             else
             {
-                for (int i=length - 1; i > stable; i--)
+                for (int i=length; i > stable; i--)
                 {
-                    char letter = word[i];
+                    char letter = word[i-1];
                     int index = Array.FindIndex(Letters, l => l == letter);
                     if (index + 1 < Letters.Count())
                     {
-                        word = string.Concat(word.Take(i));
+                        word = string.Concat(word.Take(i-1));
                         //word = string.Concat(Letters[index + 1]);
                         word += Letters[index + 1];
-                        for (int j = i+1; j < length; j++)
+                        for (int j = i; j < length; j++)
                         {
                             word += Letters[0];
                         }
